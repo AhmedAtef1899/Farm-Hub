@@ -1,5 +1,6 @@
 
 import 'package:farm_hub/modules/auth_screens/forget_password/forget_password.dart';
+import 'package:farm_hub/modules/layout/layout_screen.dart';
 import 'package:farm_hub/shared/styles/color.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -45,21 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 100,),
                            Text(
                             'YoFarm Hub',
-                             style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.w600,
-                              color: defaultColor
-                            ),
+                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           const SizedBox(
                             height: 16,
                           ),
-                          const Text(
+                           Text(
                             'Enter your credential to Login',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           const SizedBox(
                             height: 30,
@@ -113,10 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               text: 'Login',
                               function: () {
                                 if (formKey.currentState!.validate()) {
-                                  LoginCubit.get(context).getLogin(
-                                      email: emailController.text,
-                                      password: passController.text
-                                  );
+                                  navigateAndFinish(context, AppLayout());
                                 }
                               }
                           ),
@@ -129,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                 fontSize: 18,
-                                color: HexColor('#28282899'),
+                                color: Colors.grey[500],
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -141,24 +132,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 child:  Text(
                                   'Forget password?',
-                                  style: TextStyle(
-                                      color: defaultColor,
-                                      fontSize: 14,
-                                    fontWeight: FontWeight.w500
-                                  ),
+                                  style: Theme.of(context).textTheme.labelMedium,
                                   textAlign: TextAlign.center,
+
                                 )
                             ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
+                               Text(
                                 'Don\'nt have an account?',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               TextButton(onPressed: () {
                                 navigateAndFinish(context,
@@ -167,13 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               }, child:
                                Text(
                                 'Sign Up',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: defaultColor,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: defaultColor
-                                ),
+                                style: Theme.of(context).textTheme.labelMedium,
                               )
                               )
                             ],

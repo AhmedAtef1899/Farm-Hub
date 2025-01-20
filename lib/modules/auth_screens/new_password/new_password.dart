@@ -28,14 +28,14 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 100),
-                const Text(
+                 Text(
                   'Set a new password',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 16),
-                const Text(
+                 Text(
                   'Set up a strong password for your security. Use a minimum of 8 letters, numbers, alphabets, symbols to make your password strong',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 40),
                 defaultForm(
@@ -70,7 +70,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 defaultButton(
                     background: defaultColor,
@@ -84,45 +84,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCodeField(BuildContext context) {
-    return Container(
-      width: 60,
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle
-      ),
-      child: TextFormField(
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        maxLength: 1,
-        decoration: InputDecoration(
-          fillColor: Colors.white,
-          label: const Text(
-              ''
-          ),
-          labelStyle: const TextStyle(
-            color: Colors.grey,
-            fontSize: 40,
-          ),
-          counterText: '',
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: Colors.white, width: 2),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: Colors.green, width: 2),
-          ),
-        ),
-        onChanged: (value) {
-          if (value.length == 1) {
-            FocusScope.of(context).nextFocus();
-          }
-        },
       ),
     );
   }

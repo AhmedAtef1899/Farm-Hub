@@ -30,27 +30,20 @@ class OnBoarding extends StatelessWidget {
                   SizedBox(height: 30,),
                   Text(
                     'yofarm Hub B2B',
-                    style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w500,
-                        color: defaultColor
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 20,),
-                  const Text(
+                   Text(
                     'Explore the best deals on farm-fresh produce, sourced directly from farmers.\n\n Let\'s grow partnerships that empower businesses and strengthen communities..',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
               SizedBox(height: 40,),
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(20.0),
                 child: defaultButton(
                     text: 'Get start',
                     function: (){

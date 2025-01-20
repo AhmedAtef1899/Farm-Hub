@@ -4,7 +4,6 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:solar_icons/solar_icons.dart';
 
@@ -127,36 +126,36 @@ void navigateAndFinish(context,widget) =>   Navigator.pushAndRemoveUntil(
     }
 ) ;
 
-void showToast({required String msg, ToastState? state}) =>  Fluttertoast.showToast(
-    msg: msg,
-    toastLength: Toast.LENGTH_LONG,
-    gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 5,
-    backgroundColor: chooseToastColor(state!),
-    textColor: Colors.white,
-    fontSize: 16.0
-);
+// void showToast({required String msg, ToastState? state}) =>  Fluttertoast.showToast(
+//     msg: msg,
+//     toastLength: Toast.LENGTH_LONG,
+//     gravity: ToastGravity.BOTTOM,
+//     timeInSecForIosWeb: 5,
+//     backgroundColor: chooseToastColor(state!),
+//     textColor: Colors.white,
+//     fontSize: 16.0
+// );
+//
+// //enum
+//
+// enum ToastState {SUCCESS,ERROR,WARNING}
 
-//enum
-
-enum ToastState {SUCCESS,ERROR,WARNING}
-
-Color chooseToastColor(ToastState state){
-  Color color;
-  switch(state)
-  {
-    case ToastState.SUCCESS:
-      color = Colors.green;
-      break;
-    case ToastState.ERROR:
-      color =  Colors.red;
-      break;
-    case ToastState.WARNING:
-      color =  Colors.amber;
-      break;
-  }
-  return color;
-}
+// Color chooseToastColor(ToastState state){
+//   Color color;
+//   switch(state)
+//   {
+//     case ToastState.SUCCESS:
+//       color = Colors.green;
+//       break;
+//     case ToastState.ERROR:
+//       color =  Colors.red;
+//       break;
+//     case ToastState.WARNING:
+//       color =  Colors.amber;
+//       break;
+//   }
+//   return color;
+// }
 
 Widget listingItem()=> Builder(
   builder: (context) {
@@ -174,7 +173,6 @@ Widget listingItem()=> Builder(
               children: [
                 CircleAvatar(
                   radius: screenWidth * 0.1,
-                  // Responsive avatar radius
                   backgroundImage: const AssetImage(
                       'asset/images/Handsome adult male posing.png'),
                 ),
@@ -200,28 +198,32 @@ Widget listingItem()=> Builder(
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: screenWidth *
-                        0.05, // Responsive font size
+                        0.047, // Responsive font size
                   ),
                 ),
                 SizedBox(height: screenWidth * 0.01),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(
-                      CupertinoIcons.location_solid,
-                      color: Colors.grey[400],
-                      size: screenWidth *
-                          0.04, // Responsive icon size
+                    Row(
+                      children: [
+                        Icon(
+                          CupertinoIcons.location_solid,
+                          color: Colors.grey[400],
+                          size: screenWidth *
+                              0.04, // Responsive icon size
+                        ),
+                        Text(
+                          'Anatole, France.',
+                          style: TextStyle(
+                            color: Colors.grey[400],
+                            fontSize: screenWidth *
+                                0.035, // Responsive font size
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: screenWidth * 0.01),
-                    Text(
-                      'Anatole, France.',
-                      style: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: screenWidth *
-                            0.035, // Responsive font size
-                      ),
-                    ),
-                    SizedBox(width: screenWidth * 0.02),
+                    const SizedBox(height: 2),
                     Row(
                       children: [
                         CircleAvatar(
@@ -285,7 +287,7 @@ Widget listingItem()=> Builder(
           ],
         ),
         const SizedBox(
-          height: 20,
+          height: 15,
         ),
         Container(
           padding: const EdgeInsets.only(
@@ -332,16 +334,14 @@ Widget listingItem()=> Builder(
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 15,
         ),
         Text(
           'Lorem ipsum dolor sit amet consectetur. Et ullamcorper sed nisi urna. Nibh nulla lobortis rhoncus dui habitasse id egestas amet.',
-          style: TextStyle(
-              color: Colors.grey[700]
-          ),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         const SizedBox(
-          height: 20,
+          height: 15,
         ),
         Row(
           children: [
@@ -544,7 +544,9 @@ Widget listingItem()=> Builder(
             function: (){
 
             }
-        )
+        ),
+        const SizedBox(height: 20,),
+        line()
       ],
     );
   }
@@ -608,24 +610,28 @@ Widget insightItem()=> Builder(
                   ),
                 ),
                 SizedBox(height: screenWidth * 0.01),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(
-                      CupertinoIcons.location_solid,
-                      color: Colors.grey[400],
-                      size: screenWidth *
-                          0.04, // Responsive icon size
+                    Row(
+                      children: [
+                        Icon(
+                          CupertinoIcons.location_solid,
+                          color: Colors.grey[400],
+                          size: screenWidth *
+                              0.04, // Responsive icon size
+                        ),
+                        Text(
+                          'Anatole, France.',
+                          style: TextStyle(
+                            color: Colors.grey[400],
+                            fontSize: screenWidth *
+                                0.035, // Responsive font size
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: screenWidth * 0.01),
-                    Text(
-                      'Anatole, France.',
-                      style: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: screenWidth *
-                            0.035, // Responsive font size
-                      ),
-                    ),
-                    SizedBox(width: screenWidth * 0.02),
+                    SizedBox(height: 3),
                     Row(
                       children: [
                         CircleAvatar(
@@ -677,24 +683,20 @@ Widget insightItem()=> Builder(
             ),
           ],
         ),
-        const SizedBox(height: 16,),
+        const SizedBox(height: 15,),
         const Text(
           'Mixed farming diversifies agriculture for resilience.',
           style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 24
+              fontSize: 20
           ),
         ),
-        const SizedBox(height: 16,),
+        const SizedBox(height: 10,),
         Text(
           'Mixed farming involves cultivating different crops and raising various types of livestock on the same piece of land. This approach enhances the resilience of agricultural systems by spreading risks assoc ...see more',
-          style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 16,
-              color: Colors.grey[700]
-          ),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
-        const SizedBox(height: 16,),
+        const SizedBox(height: 15,),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 8),
           height: 48,
@@ -818,7 +820,9 @@ Widget insightItem()=> Builder(
               )
             ],
           ),
-        )
+        ),
+        const SizedBox(height: 20,),
+        line()
       ],
     );
   }
@@ -977,7 +981,7 @@ Widget ownerMenu()=>FractionallySizedBox(
         Row(
           children: [
             listingMenu('Mark as Booked', FluentIcons.communication_24_regular),
-            SizedBox(width: 8,),
+            const SizedBox(width: 8,),
             Icon(
               CupertinoIcons.checkmark_rectangle_fill,
               color: defaultColor,
@@ -988,21 +992,21 @@ Widget ownerMenu()=>FractionallySizedBox(
         Row(
           children: [
             listingMenu('Listing Id', SolarIconsOutline.billList),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             Container(
               color: Colors.grey[100],
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               alignment: Alignment.center,
               child: Row(
                 children: [
-                  Text('BUY001'),
-                  SizedBox(width: 4,),
+                  const Text('BUY001'),
+                  const SizedBox(width: 4,),
                   GestureDetector(
                     onTap: () {
-                      Clipboard.setData(ClipboardData(text: 'BUY001'));
-                      showToast(msg: 'ID copied to clipboard');
+                      Clipboard.setData(const ClipboardData(text: 'BUY001'));
+                      // showToast(msg: 'ID copied to clipboard');
                     },
                     child: Icon(
                       Icons.copy,
@@ -1050,21 +1054,21 @@ Widget userMenu()=>FractionallySizedBox(
         Row(
           children: [
             listingMenu('Listing Id', SolarIconsOutline.billList),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             Container(
               color: Colors.grey[100],
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               alignment: Alignment.center,
               child: Row(
                 children: [
-                  Text('BUY001'),
-                  SizedBox(width: 4,),
+                  const Text('BUY001'),
+                  const SizedBox(width: 4,),
                   GestureDetector(
                     onTap: () {
-                      Clipboard.setData(ClipboardData(text: 'BUY001'));
-                      showToast(msg: 'ID copied to clipboard');
+                      Clipboard.setData(const ClipboardData(text: 'BUY001'));
+                      // showToast(msg: 'ID copied to clipboard');
                     },
                     child: Icon(
                       Icons.copy,

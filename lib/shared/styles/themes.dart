@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'color.dart';
 
 
 ThemeData themeDark = ThemeData(
@@ -59,26 +60,42 @@ ThemeData themeDark = ThemeData(
 
 ThemeData themeLight = ThemeData(
   fontFamily: 'Gelion',
-    textTheme: const TextTheme(
-        bodyLarge: TextStyle(
-            color: Colors.black,
+    textTheme: TextTheme(
+        titleLarge: TextStyle(
+            fontSize: 32,
             fontWeight: FontWeight.w600,
-            fontSize: 19
-        )
+            color: defaultColor
+        ),
+        titleMedium: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 24,
+            color: defaultColor
+        ),
+        bodyMedium: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+      labelMedium: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+          color: defaultColor,
+          decoration: TextDecoration.underline,
+          decorationColor: defaultColor
+      ),
     ),
     scaffoldBackgroundColor: Colors.grey[100],
     appBarTheme:   AppBarTheme(
         titleSpacing: 20,
         backgroundColor: Colors.grey[100],
         elevation: 0.0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
             color: Colors.black
         ),
         systemOverlayStyle: SystemUiOverlayStyle(
            statusBarColor: Colors.grey[100],
           statusBarIconBrightness: Brightness.dark
         ),
-        titleTextStyle: TextStyle(
+        titleTextStyle: const TextStyle(
             fontSize: 20,
             color: Colors.black,
             fontWeight: FontWeight.bold

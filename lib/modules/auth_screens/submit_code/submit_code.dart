@@ -18,20 +18,20 @@ class SubmitCodeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 100),
-                const Text(
+                 Text(
                   'Verification Code',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 16),
-                const Text(
+                 Text(
                   'Collect the code from your email address and enter it\nharrisonmatovu@zamil.com',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 100),
-                const Center(
+                 Center(
                   child: Text(
                     '01:05',
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.w400),
+                    style: Theme.of(context).textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -40,33 +40,25 @@ class SubmitCodeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: List.generate(4, (index) => _buildCodeField(context)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                     Text(
                       'Don\'nt received code?',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                    TextButton(onPressed: () {
-                    }, child:
+                    TextButton(onPressed: () {}, child:
                     Text(
                       'Send again',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: defaultColor,
-                      ),
+                      style: Theme.of(context).textTheme.labelMedium,
                     )
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 defaultButton(
@@ -75,7 +67,7 @@ class SubmitCodeScreen extends StatelessWidget {
                     radius: 100,
                     text: 'Submit',
                     function: () {
-                      navigateTo(context, NewPasswordScreen());
+                      navigateTo(context, const NewPasswordScreen());
                     }
                 ),
               ],
@@ -89,7 +81,7 @@ class SubmitCodeScreen extends StatelessWidget {
   Widget _buildCodeField(BuildContext context) {
     return Container(
       width: 60,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle
       ),
@@ -99,10 +91,10 @@ class SubmitCodeScreen extends StatelessWidget {
         maxLength: 1,
         decoration: InputDecoration(
           fillColor: Colors.white,
-          label: Text(
+          label: const Text(
               ''
           ),
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             color: Colors.grey,
             fontSize: 40,
           ),

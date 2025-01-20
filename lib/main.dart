@@ -1,5 +1,6 @@
 
 import 'package:farm_hub/modules/layout/layout_screen.dart';
+import 'package:farm_hub/modules/on_boarding/on_boarding.dart';
 import 'package:farm_hub/shared/bloc_observ.dart';
 import 'package:farm_hub/shared/network/local/cache_helper.dart';
 import 'package:farm_hub/shared/styles/themes.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeLight,
-      home: const AppLayout(),
+      home: AppLayout(),
     );
   }
 }

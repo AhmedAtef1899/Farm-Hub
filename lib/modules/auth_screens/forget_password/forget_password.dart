@@ -34,23 +34,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 const SizedBox(
                   height: 100,
                 ),
-                const Text(
+                 Text(
                   'Forget Password',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 32,
-                    color: CupertinoColors.black
-                  ),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(
                   height: 16,
                 ),
-                const Text(
+                 Text(
                     'To reset your password, you need your email or mobile number that can be authenticated',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(
                   height: 40,
@@ -192,12 +185,9 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                     Text(
                       'Don\'t have an account?',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(width: 5,),
                     TextButton(onPressed: (){
@@ -205,13 +195,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     },
                         child: Text(
                           'Sign Up',
-                          style: TextStyle(
-                              color: defaultColor,
-                              decoration: TextDecoration.underline,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              decorationColor: defaultColor
-                          ),
+                          style: Theme.of(context).textTheme.labelMedium,
                         )
                     )
                   ],

@@ -39,19 +39,12 @@ class ListingScreen extends StatelessWidget {
               children: [
                 Text(
                   'New Listing',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 24,
-                    color: defaultColor
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-                const SizedBox(height: 40,),
-                const Text(
+                const SizedBox(height: 20,),
+                 Text(
                   'What are you selling...',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(
                   height: 16,
@@ -74,17 +67,17 @@ class ListingScreen extends StatelessWidget {
                             color: Colors.grey[700]
                           ),
                           keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
+                          decoration:  InputDecoration(
                             border: InputBorder.none,
                             labelText: 'Enter text...',
                             labelStyle: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
-                              color: Colors.grey
+                              color: Colors.grey[700]
                             ),
                             suffixIcon: Icon(
                               Icons.edit_rounded,
-                              color: Colors.grey,
+                              color: Colors.grey[700],
                             ),
                           ),
                         ),
@@ -93,17 +86,14 @@ class ListingScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 10,
                 ),
-                const Text(
+                 Text(
                   'Price:',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 10,
                 ),
                 Row(
                   children: [
@@ -126,13 +116,13 @@ class ListingScreen extends StatelessWidget {
                                       color: Colors.grey[700]
                                   ),
                                   keyboardType: TextInputType.text,
-                                  decoration: const InputDecoration(
+                                  decoration:  InputDecoration(
                                     border: InputBorder.none,
                                     labelText: 'MIN UGX',
                                     labelStyle: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
-                                        color: Colors.grey
+                                        color: Colors.grey[700]
                                     ),
                                   ),
                                 ),
@@ -167,13 +157,13 @@ class ListingScreen extends StatelessWidget {
                                     color: Colors.grey[700]
                                 ),
                                 keyboardType: TextInputType.text,
-                                decoration: const InputDecoration(
+                                decoration:  InputDecoration(
                                   border: InputBorder.none,
                                   labelText: 'MAX UGX',
                                   labelStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.grey
+                                      color: Colors.grey[700]
                                   ),
                                 ),
                               ),
@@ -187,15 +177,12 @@ class ListingScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                const Text(
-                  'Discription:',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500
-                  ),
+                 Text(
+                  'Description:',
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 10,
                 ),
                 Container(
                   padding: const EdgeInsets.all(20),

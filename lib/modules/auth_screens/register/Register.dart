@@ -62,20 +62,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                children: [
                                  Text(
                                    'YoFarm Hub',
-                                   style: TextStyle(
-                                       fontSize: 32,
-                                       fontWeight: FontWeight.w600,
-                                       color: defaultColor
-                                   ),
+                                   style: Theme.of(context).textTheme.titleLarge,
                                  ),
                                  const SizedBox(
                                    height: 16,
                                  ),
-                                 const Text(
-                                   'Enter your Sign Up information below',style: TextStyle(
-                                   fontSize: 14,
-                                   fontWeight: FontWeight.w400
-                                  ),
+                                  Text(
+                                   'Enter your Sign Up information below',
+                                    style: Theme.of(context).textTheme.bodyMedium,
                                  ),
                                ],
                              ),
@@ -193,7 +187,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
                       state is SocialRegisterLoadingState?
                        LinearProgressIndicator(color: Colors.greenAccent[500]
@@ -204,19 +198,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           background: defaultColor,
                           text: 'Sign up',
                           function: (){
-                            // if (formKey.currentState!.validate())
-                            // {
-                            //   SocialRegisterCubit.get(context).getRegister(
-                            //       name: nameController.text,
-                            //       email: emailController.text,
-                            //       phone: phoneController.text,
-                            //       password: passController.text
-                            //   );
-                            // }
                           }
                       ),
                       const SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
                       Container(
                         height: 68,
@@ -272,31 +257,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                           Text(
                             'Already have an account?',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14
-                            ),
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           const SizedBox(width: 5,),
                           TextButton(onPressed: (){
-                            navigateAndFinish(context, LoginScreen());
+                            navigateAndFinish(context, const LoginScreen());
                             },
                               child: Text(
                                 'Login',
-                                style: TextStyle(
-                                  color: defaultColor,
-                                  decoration: TextDecoration.underline,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  decorationColor: defaultColor
-                                ),
+                                style: Theme.of(context).textTheme.labelMedium,
                               )
                           )
                         ],
@@ -309,14 +285,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
         listener: (context, state) {
-          // if (state is SocialRegisterCreationSuccessState)
-          // {
-          //   CacheHelper.saveData(key: 'uId', value: FirebaseAuth.instance.currentUser?.uid);
-          //   navigateAndFinish(context,  const SocialLayout());
-          //   showToast(msg: 'Sign Up Successfully',state: ToastState.SUCCESS);
-          // }else if(state is SocialRegisterCreationErrorState){
-          //   showToast(msg: 'Error in inputs / Don\'t enter an existing email',state: ToastState.ERROR);
-          // }
         },
       ),
     );
