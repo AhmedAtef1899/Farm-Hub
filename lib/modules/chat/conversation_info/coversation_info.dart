@@ -1,19 +1,22 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:farm_hub/modules/chat/conversation_info/report.dart';
 import 'package:farm_hub/shared/components/components.dart';
 import 'package:farm_hub/shared/styles/color.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class ConversationInfoScreen extends StatelessWidget {
-  const ConversationInfoScreen({super.key});
+import '../../../shared/models/user_model.dart';
 
+class ConversationInfoScreen extends StatelessWidget {
+  const ConversationInfoScreen(
+      {super.key, required this.userInfo, required this.chatRoomId});
+  final User userInfo;
+  final String chatRoomId;
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -26,8 +29,8 @@ class ConversationInfoScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(CupertinoIcons.info_circle_fill, color: Colors.black,
-                size: screenWidth * 0.06),
+            icon: Icon(CupertinoIcons.info_circle_fill,
+                color: Colors.black, size: screenWidth * 0.06),
           ),
         ],
       ),
@@ -60,8 +63,15 @@ class ConversationInfoScreen extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: screenWidth * 0.125,
-                          backgroundImage: const AssetImage(
-                              'asset/images/Handsome adult male posing.png'),
+                          backgroundColor: defaultColor,
+                          foregroundImage: userInfo.avatar!.isEmpty
+                              ? null
+                              : CachedNetworkImageProvider(userInfo.avatar!),
+                          child: const Icon(
+                            FluentIcons.person_20_filled,
+                            size: 55,
+                            color: Colors.white,
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.all(screenWidth * 0.015),
@@ -81,7 +91,7 @@ class ConversationInfoScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Harrisonmatovu',
+                          userInfo.fullName!,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: screenWidth * 0.05,
@@ -97,7 +107,7 @@ class ConversationInfoScreen extends StatelessWidget {
                             ),
                             SizedBox(width: screenWidth * 0.01),
                             Text(
-                              'Anatole, France.',
+                              userInfo.location!,
                               style: TextStyle(
                                 color: Colors.grey[400],
                                 fontSize: screenWidth * 0.035,
@@ -162,18 +172,14 @@ class ConversationInfoScreen extends StatelessWidget {
                         const Text(
                           'Notification’s',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600
-                          ),
+                              fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(
                           height: 8,
                         ),
                         Text(
                           'Snooze notification’s from user',
-                          style: TextStyle(
-                              color: Colors.grey[400]
-                          ),
+                          style: TextStyle(color: Colors.grey[400]),
                         )
                       ],
                     ),
@@ -186,8 +192,7 @@ class ConversationInfoScreen extends StatelessWidget {
                           height: 20,
                           decoration: BoxDecoration(
                               color: Colors.grey[400],
-                              borderRadius: BorderRadius.circular(100)
-                          ),
+                              borderRadius: BorderRadius.circular(100)),
                         ),
                         const CircleAvatar(
                           backgroundColor: Colors.green,
@@ -198,89 +203,94 @@ class ConversationInfoScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 40,),
+              const SizedBox(
+                height: 40,
+              ),
               GestureDetector(
                 onTap: () {
                   showModalBottomSheet(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     context: context,
                     isScrollControlled: true, // Allows setting custom height
-                    builder: (context) =>
-                        FractionallySizedBox(
-                          heightFactor: 0.4,
-                          child: Padding(
-                            padding: const EdgeInsets.all(40),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Center(
-                                  child: Container(
-                                    height: 8,
-                                    width: 50,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
+                    builder: (context) => FractionallySizedBox(
+                      heightFactor: 0.4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(40),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Center(
+                              child: Container(
+                                height: 8,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                const SizedBox(height: 24),
-                                const Text(
-                                  'Block Harrisonmatovu. Harrisonmatovu will no longer be able to follow or message you, and you will not see notifications from Harrisonmatovu.',
-                                  textAlign: TextAlign.center,
-                                ),
-                                const SizedBox(height: 24),
-                                defaultButton(
-                                  background: HexColor('#282828'),
-                                  text: 'Block Harrisonmatovu',
-                                  function: () {},
-                                  height: 58,
-                                ),
-                                const SizedBox(height: 24),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 58,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
-                                      color: Colors.white,
-                                      border: Border.all(
-                                        style: BorderStyle.solid,
-                                        width: 2,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    child: const Text(
-                                      'Cancel',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                            const SizedBox(height: 24),
+                            Text(
+                              'Block ${userInfo.fullName}. ${userInfo.fullName} will no longer be able to follow or message you, and you will not see notifications from ${userInfo.fullName}.',
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 24),
+                            defaultButton(
+                              background: HexColor('#282828'),
+                              text: 'Block ${userInfo.fullName}',
+                              function: () {},
+                              height: 58,
+                            ),
+                            const SizedBox(height: 24),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 58,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: Colors.white,
+                                  border: Border.all(
+                                    style: BorderStyle.solid,
+                                    width: 2,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+                      ),
+                    ),
                   );
                 },
                 child: containerItem(
-                    'Block Harrisonmatovu!', Icons.block_flipped),
+                    'Block ${userInfo.fullName}!', Icons.block_flipped),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               InkWell(
-                onTap: (){
+                onTap: () {
                   navigateTo(context, const ReportScreen());
                 },
                 child: containerItem(
-                    'Report Harrisonmatovu!', Icons.report_gmailerrorred),
+                    'Report ${userInfo.fullName}!', Icons.report_gmailerrorred),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
@@ -305,8 +315,8 @@ class ConversationInfoScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 24),
-                              const Text(
-                                'You\'ve successfully unfollowed Harrisonmatovu. While their listing won\'t appear in your timeline, you can still view their profile.Leave Cancel',
+                              Text(
+                                'You\'ve successfully unfollowed ${userInfo.fullName}. While their listing won\'t appear in your timeline, you can still view their profile.Leave Cancel',
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 24),
@@ -350,7 +360,8 @@ class ConversationInfoScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: containerItem('Leave Conversation!', Icons.output_rounded)),
+                  child: containerItem(
+                      'Leave Conversation!', Icons.output_rounded)),
             ],
           ),
         ),
@@ -360,18 +371,18 @@ class ConversationInfoScreen extends StatelessWidget {
 }
 
 Widget containerItem(String text, IconData icon) => Container(
-  padding: const EdgeInsets.all(20),
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(8),
-    color: CupertinoColors.white,
-  ),
-  child: Row(
-    children: [
-      Icon(icon),
-      const SizedBox(
-        width: 16,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: CupertinoColors.white,
       ),
-      Text(text)
-    ],
-  ),
-);
+      child: Row(
+        children: [
+          Icon(icon),
+          const SizedBox(
+            width: 16,
+          ),
+          Text(text)
+        ],
+      ),
+    );

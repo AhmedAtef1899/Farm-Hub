@@ -1,6 +1,10 @@
-
-import 'package:farm_hub/modules/layout/layout_screen.dart';
-import 'package:farm_hub/modules/on_boarding/on_boarding.dart';
+import 'package:farm_hub/logic/chat/chat_cubit.dart';
+import 'package:farm_hub/logic/posts/post_cubit.dart';
+import 'package:farm_hub/logic/user/user_cubit.dart';
+import 'package:farm_hub/modules/auth_screens/login/login.dart';
+import 'package:farm_hub/modules/auth_screens/splash/splash_screen.dart';
+import 'package:farm_hub/modules/auth_screens/on_boarding/on_boarding.dart';
+import 'package:farm_hub/modules/layout/cubit/cubit.dart';
 import 'package:farm_hub/shared/bloc_observ.dart';
 import 'package:farm_hub/shared/network/local/cache_helper.dart';
 import 'package:farm_hub/shared/styles/themes.dart';
@@ -9,23 +13,93 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
-  runApp( const MyApp());
+  bool mode = CacheHelper.getData(key: 'iconMode') ?? false;
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.dumpErrorToConsole(details);
+    runApp(ErrorWidgetClass(details));
+  };
+  runApp(MyApp(iconMode: mode,));
 }
-class MyApp extends StatelessWidget
-{
-  const MyApp({super.key});
+
+class MyApp extends StatelessWidget {
+  final bool iconMode;
+  const MyApp({super.key, required this.iconMode});
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: themeLight,
-      home: AppLayout(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => UserCubit()),
+        BlocProvider(create: (context) => ChatCubit()),
+        BlocProvider(create: (context) => PostCubit()),
+        BlocProvider(create: (context) => AppCubit()..changeMode(fromShared: iconMode)),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: themeLight,
+        darkTheme: themeDark,
+        themeMode: iconMode? ThemeMode.dark : ThemeMode.light,
+        home: appRouter(),
+      ),
     );
   }
 }
 
+Widget appRouter() {
+  if (CacheHelper.getData(key: 'active')) {
+    return const SplashScreen();
+  }
+  if (CacheHelper.getData(key: 'onboarded') &&
+      CacheHelper.getData(key: 'active') == false) {
+    return const LoginScreen();
+  } else {
+    return const OnBoarding();
+  }
+}
 
+class ErrorWidgetClass extends StatelessWidget {
+  final FlutterErrorDetails errorDetails;
+  const ErrorWidgetClass(this.errorDetails, {super.key});
+  @override
+  Widget build(BuildContext context) {
+    return CustomErrorWidget(
+      errorMessage: errorDetails.exceptionAsString(),
+    );
+  }
+}
+
+class CustomErrorWidget extends StatelessWidget {
+  final String errorMessage;
+
+  const CustomErrorWidget({super.key, required this.errorMessage});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.error_outline,
+            color: Colors.red,
+            size: 50.0,
+          ),
+          const SizedBox(height: 10.0),
+          const Text(
+            'Error Occurred!',
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10.0),
+          Text(
+            errorMessage,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 16.0),
+          ),
+        ],
+      ),
+    );
+  }
+}

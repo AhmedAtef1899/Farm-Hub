@@ -1,8 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:farm_hub/modules/layout/cubit/cubit.dart';
 import 'package:farm_hub/modules/layout/cubit/state.dart';
+import 'package:farm_hub/shared/network/local/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class AppLayout extends StatelessWidget {
   const AppLayout({super.key});
@@ -14,6 +16,7 @@ class AppLayout extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
         builder: (context, state) {
           var cubit = AppCubit.get(context);
+          bool mode = CacheHelper.getData(key: 'iconMode') ?? false;
           return Scaffold(
             body: cubit.screens[cubit.currentIndex],
             bottomNavigationBar: CurvedNavigationBar(
@@ -27,9 +30,9 @@ class AppLayout extends StatelessWidget {
               onTap: (index) {
                 cubit.changeBar(index);
               },
-              color: Colors.white,
+              color:mode?  HexColor("#39393D") : Colors.white,
               backgroundColor: Colors.transparent,
-              buttonBackgroundColor: Colors.white,
+              buttonBackgroundColor: mode?  HexColor("#39393D") : Colors.white,
               height: 60,
             ),
           );

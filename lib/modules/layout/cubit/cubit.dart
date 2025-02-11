@@ -1,23 +1,24 @@
-
 import 'package:farm_hub/modules/layout/cubit/state.dart';
+import 'package:farm_hub/shared/styles/themes.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restart_app/restart_app.dart';
 
+import '../../../shared/network/local/cache_helper.dart';
 import '../../add_product/add_product.dart';
 import '../../home/home.dart';
 import '../../chat/inbox.dart';
-import '../../profile/profile.dart';
+import '../../profile/profile_screen.dart';
 import '../../search.dart';
 
-class AppCubit extends Cubit<AppStates>{
-
+class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of(context);
 
-  List<Widget>screens = [
+  List<Widget> screens = const [
     HomeScreen(),
     SearchScreen(),
     AddProductScreen(),
@@ -26,17 +27,21 @@ class AppCubit extends Cubit<AppStates>{
   ];
 
   List<BottomNavigationBarItem> bottomNav = [
-    const BottomNavigationBarItem(icon: Icon(CupertinoIcons.home),label: 'Home'),
-    const BottomNavigationBarItem(icon: Icon(CupertinoIcons.search_circle),label: 'Search'),
-    const BottomNavigationBarItem(icon: Icon(CupertinoIcons.add_circled),label: 'Add Product'),
-    const BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.inbox),label: 'Inbox'),
-    const BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled),label: 'Profile'),
+    const BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.home), label: 'Home'),
+    const BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.search_circle), label: 'Search'),
+    const BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.add_circled), label: 'Add Product'),
+    const BottomNavigationBarItem(
+        icon: FaIcon(FontAwesomeIcons.inbox), label: 'Inbox'),
+    const BottomNavigationBarItem(
+        icon: Icon(CupertinoIcons.profile_circled), label: 'Profile'),
   ];
 
-  int currentIndex =0;
+  int currentIndex = 0;
 
-  void changeBar(index)
-  {
+  void changeBar(index) {
     currentIndex = index;
     emit(AppChangeBarState());
   }
@@ -45,32 +50,41 @@ class AppCubit extends Cubit<AppStates>{
   bool isConfirmPassword = true;
   IconData suffix = FluentIcons.eye_off_24_filled;
   IconData suffixConfirm = FluentIcons.eye_off_24_filled;
-  void changePass()
-  {
+
+  void changePass() {
     isPassword = !isPassword;
-    if(isPassword == true)
-    {
+    if (isPassword == true) {
       suffix = FluentIcons.eye_off_24_filled;
-    }
-    else
-    {
+    } else {
       suffix = FluentIcons.eye_24_filled;
     }
     emit(SocialChangeVisible());
   }
-  void changeConfirmPass()
-  {
+
+  void changeConfirmPass() {
     isConfirmPassword = !isConfirmPassword;
-    if(isConfirmPassword == true)
-    {
+    if (isConfirmPassword == true) {
       suffixConfirm = FluentIcons.eye_off_24_filled;
-    }
-    else
-    {
+    } else {
       suffixConfirm = FluentIcons.eye_24_filled;
     }
     emit(SocialChangeVisible());
   }
 
 
+  bool iconMode = false;
+
+  void changeMode({ bool? fromShared}) {
+    if (fromShared != null) {
+      iconMode = fromShared;
+      emit(SocialChangeMode());
+    }
+    else {
+      iconMode = !iconMode;
+      CacheHelper.setBool(key: 'iconMode', value: iconMode).then((value) =>
+      {
+        emit(SocialChangeMode()),
+      });
+    }
+  }
 }
